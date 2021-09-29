@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +19,33 @@ class RestaurantTest {
         restaurant.addToMenu("South India Thali",250);
         restaurant.addToMenu("North India Thali", 350);
     }
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void total_order_value_should_increase_when_an_item_is_selected() {
+
+        List<String> selectedItems = new ArrayList<String>();
+        selectedItems.add("Sweet corn soup");
+        selectedItems.add("Vegetable lasagne");
+        assertEquals(388, restaurant.getOrderTotal(selectedItems));
+    }
+
+    @Test
+    public void total_order_value_should_decrease_when_an_item_is_removed(){
+        List<String> selectedItems = new ArrayList<String>();
+        selectedItems.add("Sweet corn soup");
+        selectedItems.add("Vegetable lasagne");
+        selectedItems.remove("Vegetable lasagne");
+        assertEquals(119,restaurant.getOrderTotal(selectedItems));
+
+    }
+    @Test
+    public void total_order_value_should_be_zero_when_cart_is_empty(){
+        List<String> selectedItems = new ArrayList<String>();
+        assertEquals(0,restaurant.getOrderTotal(selectedItems));
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //-------FOR THE 2 TESTS BELOW, YOU MAY USE THE CONCEPT OF MOCKING, IF YOU RUN INTO ANY TROUBLE
